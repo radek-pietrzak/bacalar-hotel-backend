@@ -36,5 +36,7 @@ public class DBInit {
         roomRepository.save(room8);
         roomRepository.save(room9);
         roomRepository.save(room10);
+
+
     }
 }

@@ -29,10 +29,6 @@ public class Room {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public int getRoomNumber() {
         return roomNumber;
     }
@@ -56,4 +52,17 @@ public class Room {
     public void setNumberOfDoubleBed(int numberOfDoubleBed) {
         this.numberOfDoubleBed = numberOfDoubleBed;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getNumberOfPerson() {
+        return numberOfPerson;
+    }
+
+    public void setNumberOfPerson(int numberOfPerson) {
+        this.numberOfPerson = numberOfPerson;
+    }
+
 }
