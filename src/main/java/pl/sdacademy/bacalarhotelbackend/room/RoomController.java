@@ -29,6 +29,7 @@ public class RoomController {
 
     @PostMapping
     public Room addRoom(@RequestBody Room room) {
+        room.setNumberOfPerson(room.getNumberOfSingleBed() + room.getNumberOfDoubleBed() * 2);
         return roomRepository.save(room);
     }
 
