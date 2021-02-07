@@ -64,5 +64,4 @@ public class Room {
     public void setNumberOfPerson(int numberOfPerson) {
         this.numberOfPerson = numberOfPerson;
     }
-
 }
