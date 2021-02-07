@@ -64,4 +64,12 @@ public class Room {
     public void setNumberOfPerson(int numberOfPerson) {
         this.numberOfPerson = numberOfPerson;
     }
+
+    public void updateFrom (Room source){
+        roomNumber = source.roomNumber;
+        numberOfSingleBed = source.numberOfSingleBed;
+        numberOfDoubleBed = source.numberOfDoubleBed;
+        numberOfPerson = source.numberOfSingleBed + source.numberOfDoubleBed * 2;
+    }
+
 }
