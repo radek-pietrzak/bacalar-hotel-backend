@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
@@ -36,7 +35,7 @@ public class RoomController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateRoom(@PathVariable long id, @RequestBody Room roomToUpdate) {
+    public ResponseEntity<Room> updateRoom(@PathVariable long id, @RequestBody Room roomToUpdate) {
         if (!roomRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -45,7 +44,9 @@ public class RoomController {
                     room.updateFrom(roomToUpdate);
                     roomRepository.save(room);
                 });
-        return ResponseEntity.noContent().build();
+        return roomRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @Transactional
