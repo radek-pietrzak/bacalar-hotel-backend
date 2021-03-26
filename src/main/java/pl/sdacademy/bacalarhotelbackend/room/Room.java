@@ -1,11 +1,12 @@
 package pl.sdacademy.bacalarhotelbackend.room;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import pl.sdacademy.bacalarhotelbackend.reservation.Reservation;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
+@Table(name = "room")
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +15,8 @@ public class Room {
     private int numberOfSingleBed;
     private int numberOfDoubleBed;
     private int numberOfPerson;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
+    private Set<Reservation> reservations;
 
     public Room() {
     }
@@ -65,7 +68,17 @@ public class Room {
         this.numberOfPerson = numberOfPerson;
     }
 
-    public void updateFrom (Room source){
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+
+
+    public void updateFrom(Room source) {
         roomNumber = source.roomNumber;
         numberOfSingleBed = source.numberOfSingleBed;
         numberOfDoubleBed = source.numberOfDoubleBed;
