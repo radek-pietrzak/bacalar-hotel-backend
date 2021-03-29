@@ -3,7 +3,8 @@ package pl.sdacademy.bacalarhotelbackend.reservation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sdacademy.bacalarhotelbackend.guest.Guest;
-import pl.sdacademy.bacalarhotelbackend.room.Room;
+import pl.sdacademy.bacalarhotelbackend.guest.GuestReservation;
+import pl.sdacademy.bacalarhotelbackend.room.RoomReservation;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -66,12 +67,12 @@ public class ReservationController {
 
     @Transactional
     @PatchMapping("/{id}/room-change")
-    public ResponseEntity<Reservation> patchRoom(@PathVariable long id, @RequestBody Room roomToUpdate) {
+    public ResponseEntity<Reservation> patchRoom(@PathVariable long id, @RequestBody RoomReservation roomReservationToUpdate) {
         if (!reservationRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         reservationRepository.findById(id)
-                .ifPresent(r -> r.setRoom(roomToUpdate));
+                .ifPresent(r -> r.setRoomReservation(roomReservationToUpdate));
         return reservationRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -79,12 +80,12 @@ public class ReservationController {
 
     @Transactional
     @PatchMapping("/{id}/guest-change")
-    public ResponseEntity<Reservation> patchGuest(@PathVariable long id, @RequestBody Guest guestToUpdate) {
+    public ResponseEntity<Reservation> patchGuest(@PathVariable long id, @RequestBody GuestReservation guestToUpdate) {
         if (!reservationRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
         reservationRepository.findById(id)
-                .ifPresent(g -> g.setGuest(guestToUpdate));
+                .ifPresent(g -> g.setGuestReservation(guestToUpdate));
         return reservationRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

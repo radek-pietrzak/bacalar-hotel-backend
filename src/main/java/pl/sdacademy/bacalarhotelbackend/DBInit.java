@@ -3,10 +3,14 @@ package pl.sdacademy.bacalarhotelbackend;
 import org.springframework.stereotype.Component;
 import pl.sdacademy.bacalarhotelbackend.guest.Guest;
 import pl.sdacademy.bacalarhotelbackend.guest.GuestRepository;
+import pl.sdacademy.bacalarhotelbackend.guest.GuestReservation;
+import pl.sdacademy.bacalarhotelbackend.guest.GuestReservationRepository;
 import pl.sdacademy.bacalarhotelbackend.reservation.Reservation;
 import pl.sdacademy.bacalarhotelbackend.reservation.ReservationRepository;
 import pl.sdacademy.bacalarhotelbackend.room.Room;
 import pl.sdacademy.bacalarhotelbackend.room.RoomRepository;
+import pl.sdacademy.bacalarhotelbackend.room.RoomReservation;
+import pl.sdacademy.bacalarhotelbackend.room.RoomReservationRepository;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
@@ -16,13 +20,16 @@ public class DBInit {
     private final RoomRepository roomRepository;
     private final GuestRepository guestRepository;
     private final ReservationRepository reservationRepository;
+    private final RoomReservationRepository roomReservationRepository;
+    private final GuestReservationRepository guestReservationRepository;
 
-    public DBInit(RoomRepository roomRepository, GuestRepository guestRepository, ReservationRepository reservationRepository) {
+    public DBInit(RoomRepository roomRepository, GuestRepository guestRepository, ReservationRepository reservationRepository, RoomReservationRepository roomReservationRepository, GuestReservationRepository guestReservationRepository) {
         this.roomRepository = roomRepository;
         this.guestRepository = guestRepository;
         this.reservationRepository = reservationRepository;
+        this.roomReservationRepository = roomReservationRepository;
+        this.guestReservationRepository = guestReservationRepository;
     }
-
 
     @PostConstruct
     public void onInit() {
@@ -68,16 +75,58 @@ public class DBInit {
         guestRepository.save(guest9);
         guestRepository.save(guest10);
 
-        Reservation reservation1 = new Reservation(LocalDate.of(2021, 5, 1), room1, guest1);
-        Reservation reservation2 = new Reservation(LocalDate.of(2021, 5, 2), room2, guest2);
-        Reservation reservation3 = new Reservation(LocalDate.of(2021, 5, 3), room3, guest3);
-        Reservation reservation4 = new Reservation(LocalDate.of(2021, 5, 4), room4, guest4);
-        Reservation reservation5 = new Reservation(LocalDate.of(2021, 5, 5), room5, guest5);
-        Reservation reservation6 = new Reservation(LocalDate.of(2021, 5, 6), room6, guest6);
-        Reservation reservation7 = new Reservation(LocalDate.of(2021, 5, 7), room7, guest7);
-        Reservation reservation8 = new Reservation(LocalDate.of(2021, 5, 8), room8, guest8);
-        Reservation reservation9 = new Reservation(LocalDate.of(2021, 5, 9), room9, guest9);
-        Reservation reservation10 = new Reservation(LocalDate.of(2021, 5, 10), room10, guest10);
+        GuestReservation guestReservation1 = new GuestReservation(guest1);
+        GuestReservation guestReservation2 = new GuestReservation(guest2);
+        GuestReservation guestReservation3 = new GuestReservation(guest3);
+        GuestReservation guestReservation4 = new GuestReservation(guest4);
+        GuestReservation guestReservation5 = new GuestReservation(guest5);
+        GuestReservation guestReservation6 = new GuestReservation(guest6);
+        GuestReservation guestReservation7 = new GuestReservation(guest7);
+        GuestReservation guestReservation8 = new GuestReservation(guest8);
+        GuestReservation guestReservation9 = new GuestReservation(guest9);
+        GuestReservation guestReservation10 = new GuestReservation(guest10);
+        guestReservationRepository.save(guestReservation1);
+        guestReservationRepository.save(guestReservation2);
+        guestReservationRepository.save(guestReservation3);
+        guestReservationRepository.save(guestReservation4);
+        guestReservationRepository.save(guestReservation5);
+        guestReservationRepository.save(guestReservation6);
+        guestReservationRepository.save(guestReservation7);
+        guestReservationRepository.save(guestReservation8);
+        guestReservationRepository.save(guestReservation9);
+        guestReservationRepository.save(guestReservation10);
+
+        RoomReservation roomReservation1 = new RoomReservation(room1);
+        RoomReservation roomReservation2 = new RoomReservation(room2);
+        RoomReservation roomReservation3 = new RoomReservation(room3);
+        RoomReservation roomReservation4 = new RoomReservation(room4);
+        RoomReservation roomReservation5 = new RoomReservation(room5);
+        RoomReservation roomReservation6 = new RoomReservation(room6);
+        RoomReservation roomReservation7 = new RoomReservation(room7);
+        RoomReservation roomReservation8 = new RoomReservation(room8);
+        RoomReservation roomReservation9 = new RoomReservation(room9);
+        RoomReservation roomReservation10 = new RoomReservation(room10);
+        roomReservationRepository.save(roomReservation1);
+        roomReservationRepository.save(roomReservation2);
+        roomReservationRepository.save(roomReservation3);
+        roomReservationRepository.save(roomReservation4);
+        roomReservationRepository.save(roomReservation5);
+        roomReservationRepository.save(roomReservation6);
+        roomReservationRepository.save(roomReservation7);
+        roomReservationRepository.save(roomReservation8);
+        roomReservationRepository.save(roomReservation9);
+        roomReservationRepository.save(roomReservation10);
+
+        Reservation reservation1 = new Reservation(LocalDate.of(2021, 5, 1), roomReservation1, guestReservation1);
+        Reservation reservation2 = new Reservation(LocalDate.of(2021, 5, 2), roomReservation2, guestReservation2);
+        Reservation reservation3 = new Reservation(LocalDate.of(2021, 5, 3), roomReservation3, guestReservation3);
+        Reservation reservation4 = new Reservation(LocalDate.of(2021, 5, 4), roomReservation4, guestReservation4);
+        Reservation reservation5 = new Reservation(LocalDate.of(2021, 5, 5), roomReservation5, guestReservation5);
+        Reservation reservation6 = new Reservation(LocalDate.of(2021, 5, 6), roomReservation6, guestReservation6);
+        Reservation reservation7 = new Reservation(LocalDate.of(2021, 5, 7), roomReservation7, guestReservation7);
+        Reservation reservation8 = new Reservation(LocalDate.of(2021, 5, 8), roomReservation8, guestReservation8);
+        Reservation reservation9 = new Reservation(LocalDate.of(2021, 5, 9), roomReservation9, guestReservation9);
+        Reservation reservation10 = new Reservation(LocalDate.of(2021, 5, 10), roomReservation10, guestReservation10);
         reservationRepository.save(reservation1);
         reservationRepository.save(reservation2);
         reservationRepository.save(reservation3);
