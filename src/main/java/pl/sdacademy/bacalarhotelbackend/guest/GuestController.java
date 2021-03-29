@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/guest-list")
 public class GuestController {
-    private GuestRepository guestRepository;
+    private final GuestRepository guestRepository;
 
     public GuestController(GuestRepository guestRepository) {
         this.guestRepository = guestRepository;

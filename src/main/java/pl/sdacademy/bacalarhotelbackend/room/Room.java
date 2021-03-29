@@ -1,6 +1,9 @@
 package pl.sdacademy.bacalarhotelbackend.room;
 
+import pl.sdacademy.bacalarhotelbackend.reservation.Reservation;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "room")
@@ -12,6 +15,8 @@ public class Room {
     private int numberOfSingleBed;
     private int numberOfDoubleBed;
     private int numberOfPerson;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Reservation> reservations;
 
     public Room() {
     }
@@ -61,6 +66,14 @@ public class Room {
 
     public void setNumberOfPerson(int numberOfPerson) {
         this.numberOfPerson = numberOfPerson;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     public void updateFrom(Room source) {

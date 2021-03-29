@@ -1,8 +1,7 @@
 package pl.sdacademy.bacalarhotelbackend.reservation;
 
 import pl.sdacademy.bacalarhotelbackend.guest.Guest;
-import pl.sdacademy.bacalarhotelbackend.guest.GuestReservation;
-import pl.sdacademy.bacalarhotelbackend.room.RoomReservation;
+import pl.sdacademy.bacalarhotelbackend.room.Room;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -15,19 +14,19 @@ public class Reservation {
     private Long id;
     private LocalDate date;
     @ManyToOne
-    @JoinColumn(name = "room_reservation_id")
-    private RoomReservation roomReservation;
+    @JoinColumn(name = "room_id")
+    private Room room;
     @ManyToOne
-    @JoinColumn(name = "guest_reservation_id")
-    private GuestReservation guestReservation;
+    @JoinColumn(name = "guest_id")
+    private Guest guest;
 
     public Reservation() {
     }
 
-    public Reservation(LocalDate date, RoomReservation roomReservation, GuestReservation guestReservation) {
+    public Reservation(LocalDate date, Room room, Guest guest) {
         this.date = date;
-        this.roomReservation = roomReservation;
-        this.guestReservation = guestReservation;
+        this.room = room;
+        this.guest = guest;
     }
 
     public Long getId() {
@@ -46,25 +45,25 @@ public class Reservation {
         this.date = date;
     }
 
-    public RoomReservation getRoomReservation() {
-        return roomReservation;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setRoomReservation(RoomReservation roomReservation) {
-        this.roomReservation = roomReservation;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
-    public GuestReservation getGuestReservation() {
-        return guestReservation;
+    public Guest getGuest() {
+        return guest;
     }
 
-    public void setGuestReservation(GuestReservation guestReservation) {
-        this.guestReservation = guestReservation;
+    public void setGuest(Guest guest) {
+        this.guest = guest;
     }
 
     public void updateFrom(Reservation source) {
         date = source.date;
-        roomReservation = source.roomReservation;
-        guestReservation = source.guestReservation;
+        room = source.room;
+        guest = source.guest;
     }
 }
