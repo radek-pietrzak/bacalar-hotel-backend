@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface GuestRepository extends JpaRepository<Guest, Long> {
     List<Guest>findGuestsByFirstNameContains(String firstNamePart);
+    List<Guest>findGuestsByLastNameContains(String lastNamePart);
+    List<Guest>findGuestsByEmailContains(String emailPart);
+    List<Guest>findGuestsByFirstNameContainsAndLastNameContains(String firstNamePart, String lastNamePart);
 }

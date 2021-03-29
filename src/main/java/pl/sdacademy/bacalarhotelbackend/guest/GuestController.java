@@ -21,16 +21,34 @@ public class GuestController {
         return guestRepository.findAll();
     }
 
-    @GetMapping("/find-by-first-name-part/{firstNamePart}")
-    public List<Guest> getGuestsByFirstNameContaining(@PathVariable String  firstNamePart){
-        return guestRepository.findGuestsByFirstNameContains(firstNamePart);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Guest> findById(@PathVariable long id) {
         return guestRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/find-by-first-name-part/{firstNamePart}")
+    public List<Guest> getGuestsByFirstNameContaining(@PathVariable String firstNamePart) {
+        return guestRepository.findGuestsByFirstNameContains(firstNamePart);
+    }
+
+    @GetMapping("/find-by-last-name-part/{lastNamePart}")
+    public List<Guest> getGuestsByLastNameContaining(@PathVariable String lastNamePart) {
+        return guestRepository.findGuestsByLastNameContains(lastNamePart);
+    }
+
+    @GetMapping("/find-by-email-part/{emailPart}")
+    public List<Guest> getGuestsByEmailContaining(@PathVariable String emailPart) {
+        return guestRepository.findGuestsByEmailContains(emailPart);
+    }
+
+    @GetMapping("/find-by-first-and-last-name-parts/{firstNamePart}/{lastNamePart}")
+    public List<Guest> findGuestsByFirstNameContainsAndLastNameContains(
+            @PathVariable String firstNamePart,
+            @PathVariable String lastNamePart) {
+        return guestRepository.findGuestsByFirstNameContainsAndLastNameContains(
+                firstNamePart, lastNamePart);
     }
 
     @PostMapping

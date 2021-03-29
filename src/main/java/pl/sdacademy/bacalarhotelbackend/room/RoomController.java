@@ -28,6 +28,31 @@ public class RoomController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/find-rooms-by-room-number/{roomNumber}")
+    public List<Room> findRoomsByRoomNumber(@PathVariable int roomNumber){
+        return roomRepository.findRoomsByRoomNumber(roomNumber);
+    }
+
+    @GetMapping("/find-rooms-by-number-of-single-bed/{numberOfSingleBed}")
+    public List<Room> findRoomsByNumberOfSingleBed(@PathVariable int numberOfSingleBed){
+        return roomRepository.findRoomsByNumberOfSingleBed(numberOfSingleBed);
+    }
+
+    @GetMapping("/find-rooms-by-number-of-double-bed/{numberOfDoubleBed}")
+    public List<Room> findRoomsByNumberOfDoubleBed(@PathVariable int numberOfDoubleBed){
+        return roomRepository.findRoomsByNumberOfDoubleBed(numberOfDoubleBed);
+    }
+
+    @GetMapping("/find-rooms-by-number-of-person/{numberOfPerson}")
+    public List<Room> findRoomsByNumberOfPerson(@PathVariable int numberOfPerson){
+        return roomRepository.findRoomsByNumberOfPerson(numberOfPerson);
+    }
+
+    @GetMapping("/find-rooms-by-minimum-number-of-person/{numberOfPerson}")
+    public List<Room> findRoomsByMinimumNumberOfPerson(@PathVariable int numberOfPerson){
+        return roomRepository.findRoomsByMinimumNumberOfPerson(numberOfPerson);
+    }
+
     @PostMapping
     public Room addRoom(@RequestBody Room room) {
         room.setNumberOfPerson(room.getNumberOfSingleBed() + room.getNumberOfDoubleBed() * 2);
