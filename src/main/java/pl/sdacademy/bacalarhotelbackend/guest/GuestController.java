@@ -21,6 +21,11 @@ public class GuestController {
         return guestRepository.findAll();
     }
 
+    @GetMapping("/find-by-first-name-part/{firstNamePart}")
+    public List<Guest> getGuestsByFirstNameContaining(@PathVariable String  firstNamePart){
+        return guestRepository.findGuestsByFirstNameContains(firstNamePart);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Guest> findById(@PathVariable long id) {
         return guestRepository.findById(id)
