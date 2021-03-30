@@ -18,7 +18,7 @@ public class Guest implements UserDetails {
     private String lastName;
     private String email;
     private String password;
-    private String role = "GUEST";
+    private String role;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "guest")
     private Set<Reservation> reservations = new HashSet<>();
 

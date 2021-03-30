@@ -26,6 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/room-list/only/string").hasRole("GUEST")
+                .antMatchers(HttpMethod.GET, "/guest-list/only").hasRole("ADMIN")
                 .and()
                 .csrf().disable()
                 .formLogin().disable();

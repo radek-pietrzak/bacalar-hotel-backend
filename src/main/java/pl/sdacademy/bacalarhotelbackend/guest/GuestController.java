@@ -1,8 +1,9 @@
 package pl.sdacademy.bacalarhotelbackend.guest;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import pl.sdacademy.bacalarhotelbackend.room.RoomOnly;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -13,9 +14,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/guest-list")
 public class GuestController {
     private final GuestRepository guestRepository;
+    private PasswordEncoder passwordEncoder;
 
-    public GuestController(GuestRepository guestRepository) {
+    public GuestController(GuestRepository guestRepository, PasswordEncoder passwordEncoder) {
         this.guestRepository = guestRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -29,7 +32,7 @@ public class GuestController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
+    @Secured("ROLE_ADMIN")
     @GetMapping("/only")
     public List<GuestOnly> findGuestsOnly() {
         return guestRepository.findAll()
@@ -67,6 +70,8 @@ public class GuestController {
 
     @PostMapping
     public Guest addGuest(@RequestBody Guest guest) {
+        guest.setPassword(passwordEncoder.encode(guest.getPassword()));
+        guest.setRole("GUEST");
         return guestRepository.save(guest);
     }
 
