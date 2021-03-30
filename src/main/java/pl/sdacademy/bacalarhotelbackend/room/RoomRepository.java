@@ -17,4 +17,9 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     @Query("select r from Room r where r.numberOfPerson >= :minimumNumberOfPerson")
     List<Room> findRoomsByMinimumNumberOfPerson(@Param("minimumNumberOfPerson") int minimumNumberOfPerson);
+
+    @Query("select r.id, r.roomNumber, r.numberOfSingleBed, r.numberOfPerson from Room r")
+    List<String> findRoomsOnlyInStringList();
+
+
 }

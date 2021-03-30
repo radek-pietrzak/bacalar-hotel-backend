@@ -1,36 +1,29 @@
 package pl.sdacademy.bacalarhotelbackend.room;
 
-import pl.sdacademy.bacalarhotelbackend.reservation.Reservation;
-
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
-
-@Entity
-@Table(name = "room")
-public class Room {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RoomOnly {
     private Long id;
     private int roomNumber;
     private int numberOfSingleBed;
     private int numberOfDoubleBed;
     private int numberOfPerson;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "guest")
-    private Set<Reservation> reservations = new HashSet<>();
 
-    public Room() {
+    public RoomOnly() {
     }
 
-    public Room(int roomNumber, int numberOfSingleBed, int numberOfDoubleBed) {
+    public RoomOnly(Long id, int roomNumber, int numberOfSingleBed, int numberOfDoubleBed, int numberOfPerson) {
+        this.id = id;
         this.roomNumber = roomNumber;
         this.numberOfSingleBed = numberOfSingleBed;
         this.numberOfDoubleBed = numberOfDoubleBed;
-        this.numberOfPerson = numberOfSingleBed + numberOfDoubleBed * 2;
+        this.numberOfPerson = numberOfPerson;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public int getRoomNumber() {
@@ -57,10 +50,6 @@ public class Room {
         this.numberOfDoubleBed = numberOfDoubleBed;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public int getNumberOfPerson() {
         return numberOfPerson;
     }
@@ -68,20 +57,4 @@ public class Room {
     public void setNumberOfPerson(int numberOfPerson) {
         this.numberOfPerson = numberOfPerson;
     }
-
-    public Set<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(Set<Reservation> reservations) {
-        this.reservations = reservations;
-    }
-
-    public void updateFrom(Room source) {
-        roomNumber = source.roomNumber;
-        numberOfSingleBed = source.numberOfSingleBed;
-        numberOfDoubleBed = source.numberOfDoubleBed;
-        numberOfPerson = source.numberOfSingleBed + source.numberOfDoubleBed * 2;
-    }
-
 }

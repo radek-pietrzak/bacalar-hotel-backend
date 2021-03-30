@@ -2,9 +2,11 @@ package pl.sdacademy.bacalarhotelbackend.guest;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.sdacademy.bacalarhotelbackend.room.RoomOnly;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
@@ -26,6 +28,18 @@ public class GuestController {
         return guestRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/only")
+    public List<GuestOnly> findGuestsOnly() {
+        return guestRepository.findAll()
+                .stream()
+                .map(guest -> new GuestOnly(
+                        guest.getId(),
+                        guest.getFirstName(),
+                        guest.getLastName(),
+                        guest.getEmail()))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/find-by-first-name-part/{firstNamePart}")

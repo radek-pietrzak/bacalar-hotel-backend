@@ -3,6 +3,7 @@ package pl.sdacademy.bacalarhotelbackend.guest;
 import pl.sdacademy.bacalarhotelbackend.reservation.Reservation;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,8 +15,8 @@ public class Guest {
     private String firstName;
     private String lastName;
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Reservation> reservations;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "guest")
+    private Set<Reservation> reservations = new HashSet<>();
 
     public Guest() {
     }
