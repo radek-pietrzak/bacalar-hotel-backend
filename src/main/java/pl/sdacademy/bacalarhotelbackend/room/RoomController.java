@@ -1,6 +1,7 @@
 package pl.sdacademy.bacalarhotelbackend.room;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -45,7 +46,7 @@ public class RoomController {
                         room.getNumberOfPerson()))
                 .collect(Collectors.toList());
     }
-
+    @Secured("ROLE_GUEST")
     @GetMapping("only/string")
     public List<String> findRoomsOnlyInStringList() {
         return roomRepository.findAll()
