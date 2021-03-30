@@ -32,7 +32,6 @@ public class GuestController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    @Secured("ROLE_ADMIN")
     @GetMapping("/only")
     public List<GuestOnly> findGuestsOnly() {
         return guestRepository.findAll()

@@ -46,7 +46,6 @@ public class RoomController {
                         room.getNumberOfPerson()))
                 .collect(Collectors.toList());
     }
-    @Secured("ROLE_GUEST")
     @GetMapping("only/string")
     public List<String> findRoomsOnlyInStringList() {
         return roomRepository.findAll()
